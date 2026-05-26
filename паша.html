@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0">
+    <title>Мальдивская мечта | Павел & Наталья</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Морская картинка */
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            padding: 1.5rem;
+            margin: 0;
+            color: #0a3b3b;
+            overflow-x: hidden;
+        }
+
+        /* Лёгкая бирюзовая дымка поверх фото */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(180, 225, 230, 0.35);
+            backdrop-filter: blur(1px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Солнечные блики */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 245, 0.5) 0%, transparent 8%),
+                radial-gradient(circle at 65% 30%, rgba(255, 255, 240, 0.4) 0%, transparent 6%),
+                radial-gradient(circle at 50% 65%, rgba(200, 245, 245, 0.4) 0%, transparent 10%),
+                radial-gradient(circle at 78% 72%, rgba(255, 235, 190, 0.4) 0%, transparent 7%);
+            pointer-events: none;
+            z-index: 0;
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .main-card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 250, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(90, 170, 165, 0.5);
+            box-shadow:
+                0 0 60px rgba(120, 200, 200, 0.3),
+                0 0 120px rgba(180, 200, 180, 0.2),
+                inset 0 0 40px rgba(255, 255, 240, 0.5);
+            border-radius: 28px 12px 28px 12px;
+            padding: 2.5rem 2.2rem 0.5rem 2.2rem;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 2.4rem;
+            transition: box-shadow 0.5s ease, border-color 0.5s ease;
+            color: #0a3b3b;
+        }
+
+        .main-card:hover {
+            border-color: rgba(80, 180, 160, 0.7);
+            box-shadow:
+                0 0 80px rgba(100, 180, 180, 0.45),
+                0 0 150px rgba(170, 200, 180, 0.3),
+                inset 0 0 50px rgba(255, 255, 240, 0.6);
+        }
+
+        .main-card::before,
+        .main-card::after {
+            position: absolute;
+            font-size: 2.8rem;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 8px rgba(80, 150, 140, 0.5));
+            pointer-events: none;
+        }
+
+        .main-card::before {
+            content: "🐚";
+            top: -22px;
+            left: -18px;
+            transform: rotate(-10deg);
+        }
+
+        .main-card::after {
+            content: "🌺";
+            bottom: -22px;
+            right: -18px;
+            transform: rotate(12deg);
+            font-size: 3rem;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid rgba(80, 150, 140, 0.4);
+            padding-bottom: 1.6rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 9vw, 5rem);
+            letter-spacing: 4px;
+            color: #054d4d;
+            text-shadow: 0 0 20px rgba(255, 255, 240, 0.8), 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .subheader {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #2a7a6f;
+            text-shadow: 0 0 15px rgba(255, 255, 240, 0.7);
+            letter-spacing: 3px;
+            font-style: italic;
+            margin-top: 0.1rem;
+        }
+
+        .duo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 700px) {
+            .duo-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .main-card { padding: 2rem 1.2rem 0.3rem 1.2rem; }
+        }
+
+        .person-card {
+            background: rgba(255, 255, 250, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(80, 160, 150, 0.4);
+            border-radius: 22px 8px 22px 8px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,60,60,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 1.5rem;
+            overflow: hidden;
+            color: #0a3b3b;
+        }
+
+        .person-card::after {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 70%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.25) 0%, transparent 70%);
+            pointer-events: none;
+            transform: rotate(-15deg);
+            z-index: 0;
+        }
+
+        .person-card:hover {
+            border-color: rgba(50,140,130,0.7);
+            box-shadow: 0 12px 40px rgba(0,80,80,0.15), 0 0 50px rgba(100,180,170,0.3), inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: translateY(-4px);
+        }
+
+        .person-card > * { position: relative; z-index: 1; }
+
+        .maldives-icon {
+            font-size: 4.5rem;
+            filter: drop-shadow(0 0 14px rgba(60,140,130,0.5));
+            margin-bottom: 0.8rem;
+            line-height: 1;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-8px); }
+        }
+
+        .person-name {
+            font-family: 'Playfair Display','Cormorant Garamond',serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            color: #0a4d4d;
+            text-shadow: 0 0 20px rgba(255,255,240,0.7), 0 2px 8px rgba(0,0,0,0.05);
+            margin: 0.3rem 0;
+            font-weight: 700;
+        }
+
+        .person-age {
+            background: rgba(130,200,180,0.3);
+            border: 1px solid rgba(60,140,120,0.5);
+            color: #0a3b3b;
+            font-weight: 600;
+            font-size: 1.7rem;
+            padding: 0.3rem 1.8rem;
+            border-radius: 28px;
+            display: inline-block;
+            margin: 0.5rem 0 1rem;
+            letter-spacing: 2px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 18px rgba(80,160,140,0.25);
+        }
+
+        .dream-block, .super-block {
+            background: rgba(230,250,245,0.6);
+            border-left: 5px solid #50a090;
+            padding: 1.2rem 1.1rem;
+            margin-top: 0.7rem;
+            width: 100%;
+            border-radius: 0 16px 16px 0;
+            text-align: left;
+            font-size: 1.55rem;
+            line-height: 1.5;
+            backdrop-filter: blur(8px);
+            box-shadow: inset 0 0 20px rgba(255,255,250,0.5);
+        }
+
+        .super-block { border-left-color: #3aafa9; background: rgba(225,248,242,0.6); }
+
+        .highlight {
+            color: #054d4d;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255,255,240,0.6);
+            background: rgba(255,255,245,0.7);
+            padding: 0.15rem 0.7rem;
+            border-radius: 8px;
+            font-size: 1.55rem;
+        }
+
+        .super-list { list-style: none; margin-top: 0.7rem; font-size: 1.5rem; }
+        .super-list li { margin: 0.6rem 0; display: flex; align-items: center; gap: 0.7rem; }
+        .super-list li::before { content: "🌊"; font-size: 1.6rem; filter: drop-shadow(0 0 5px #7dd8d0); }
+
+        /* Песчаный покров внизу */
+        .sand-section {
+            background: #fff9e6;  /* очень светло-жёлтый */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(210,180,140,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 85% 40%, rgba(200,170,120,0.25) 1px, transparent 1px),
+                radial-gradient(circle at 50% 80%, rgba(220,190,130,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 20% 70%, rgba(180,150,100,0.15) 1px, transparent 1px);
+            background-size: 40px 40px, 60px 60px, 50px 50px, 45px 45px;
+            border-radius: 24px 12px 24px 12px;
+            margin: 0 -0.8rem -0.3rem -0.8rem;
+            padding: 1.8rem 2rem 2rem 2rem;
+            box-shadow: inset 0 8px 12px rgba(0,0,0,0.02), 0 4px 12px rgba(200,180,120,0.3);
+            border: 1px solid rgba(200,170,100,0.3);
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .family-hobby {
+            background: rgba(255, 250, 240, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px dashed rgba(70,150,130,0.5);
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0a4d4d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(80,150,140,0.2);
+        }
+
+        .family-hobby span { font-size: 2.4rem; }
+
+        .bottom-slogan {
+            text-align: center;
+            font-family: 'Playfair Display','Cormorant Garamond',serif;
+            font-size: 1.9rem;
+            color: #2a6a5e;
+            text-shadow: 0 0 18px rgba(255,255,240,0.7), 0 2px 4px rgba(0,0,0,0.05);
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-style: italic;
+            border-top: 2px dashed rgba(70,150,130,0.4);
+            padding-top: 1.2rem;
+        }
+
+        .shell-separator {
+            font-size: 2.2rem;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 6px rgba(50,130,120,0.5));
+        }
+
+        @media (min-width: 701px) {
+            .dream-block, .super-block, .super-list { font-size: 1.65rem; }
+            .person-card { font-size: 1.65rem; }
+        }
+
+        .big-text { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.5px; }
+
+        .sand-strip {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(180,200,160,0.5) 20%, rgba(210,190,120,0.7) 50%, rgba(180,200,160,0.5) 80%, transparent);
+            border-radius: 0 0 8px 8px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <div class="header">
+            <h1>🌴 ОСТРОВ МЕЧТЫ 🌴</h1>
+            <div class="subheader">
+                <span>✨</span> Павел & Наталья <span>✨</span>
+            </div>
+        </div>
+
+        <div class="duo-grid">
+            <!-- Павел -->
+            <div class="person-card">
+                <div class="sand-strip"></div>
+                <div class="maldives-icon">🏝️🐉</div>
+                <div class="person-name">ПАВЕЛ</div>
+                <div class="person-age">12 ЛЕТ</div>
+                <div class="dream-block big-text">
+                    <p><span class="china-flag">🇨🇳</span> <span>МЕЧТА: <span class="highlight">ПОБЫВАТЬ В КИТАЕ</span></span></p>
+                    <p style="margin-top:0.7rem; font-size:1.4rem; color:#1d4d4d;">🏯 Великая стена, шумные рынки,<br> древние храмы и вкусная лапша.</p>
+                </div>
+                <div style="margin-top:0.8rem; font-size:2.2rem;">✈️🗺️🎫</div>
+            </div>
+
+            <!-- Наталья -->
+            <div class="person-card">
+                <div class="sand-strip"></div>
+                <div class="maldives-icon">🌺💎</div>
+                <div class="person-name">НАТАЛЬЯ</div>
+                <div style="font-size:1.7rem; color:#2a7a6f; margin-bottom:0.1rem; letter-spacing:2px; font-weight:600;">⭐ СУПЕРСПОСОБНОСТЬ ⭐</div>
+                <div class="super-block big-text">
+                    <p style="justify-content:center;"><span>🏄‍♀️ КАТАЕТСЯ НА ВСЁМ</span></p>
+                    <ul class="super-list">
+                        <li>🏂 Сноуборд и горные лыжи</li>
+                        <li>🚴 Велосипед и скейтборд</li>
+                    </ul>
+                </div>
+                <div class="super-block big-text" style="margin-top:0.9rem; border-left-color:#50a090;">
+                    <p><span>💼 ФИНАНСОВАЯ ГРАМОТНОСТЬ</span></p>
+                    <p style="font-size:1.4rem; color:#1d4d4d;">📊 Мастер бюджета и инвестиций<br>💰 Копит на путешествие в Китай для Павла.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Песчаный покров с семейным хобби и слоганом -->
+        <div class="sand-section">
+            <div class="family-hobby">
+                <span>🏊‍♂️🏊‍♀️</span> СЕМЕЙНОЕ ХОББИ: ПЛАВАНИЕ <span>🌊</span>
+            </div>
+            <div class="bottom-slogan">
+                <span class="shell-separator">🐚</span> ВМЕСТЕ — К ГОРИЗОНТУ <span class="shell-separator">🐚</span>
+                <span style="display:block; font-size:1.3rem; letter-spacing:2px; color:#3a6a5e; width:100%; margin-top:0.2rem; font-style:normal;">С Мальдив — прямиком в Китай!</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
